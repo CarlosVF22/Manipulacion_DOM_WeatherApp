@@ -22,14 +22,27 @@
     />
     <title>Weather App</title>
   </head>
-  <body>
-    <form id="formSearchCity">
-      <input type="text" placeholder="Busca tu ciudad" id="inputCity">
-      <button type="submit">Buscar</button>
-    </form>
-    <div id="app">
-      
-    </div>
+  <body class="bg-blue-600">
+    <section>
+      <h1 class="font-black text-white text-center p-6">Weather App with JavaScript Vainilla</h1>
+    </section>
+    <section class="containerSearch p-4 justify-items-center grid">
+      <form action="" class="formSearchCity">
+        <input type="text" placeholder="Busca tu ciudad">
+        <button type="submit" class="text-white">¡Search!</button>
+      </form>
+    </section>
+    <section class="app">
+      <div class="container">
+        <ul class="cities p-4 flex flex-wrap"></ul>
+      </div>
+    </section>
+    <section>
+      <h2 class="text-center text-white font-bold">Conoce el codigo</h2>
+      <figure>
+        <a target="_blanck" href="https://github.com/CarlosVF22/Manipulacion_DOM_WeatherApp"><img src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" alt=""></a>
+      </figure>
+    </section>
     
     <!-- Add more scripts here -->
     <script type="module" src="/_dist_/index.js"></script>

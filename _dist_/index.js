@@ -4,29 +4,47 @@
  **/
 
 const apiKey = "f909614ec47c0514210c5a1dcc829f6f";
+const form = document.querySelector(".containerSearch form");
+const input = document.querySelector(".containerSearch input");
+const list = document.querySelector(".app .container .cities");
 
-const form = document.getElementById("formSearchCity");
-const input = document.getElementById("inputCity");
+form.addEventListener("submit",(event) =>{ //escuchamos los eventos
+    event.preventDefault(); //la pagina no se recargue de nuevo
+    let inputValue = input.value; //obtenemos el valor (cityName) del input
 
-form.addEventListener("submit", (event) =>{
-    event.preventDefault(); //La pagina no se recarga
-    const cityName = input.value; //traemos el valor del input (cityName)
-    weatherInformation(cityName); //Llamamos a la funcion weatherInformation y le enviamos el nombre de la ciudad
+    //ajax here
+    //utilizamos promesas
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputValue}&appid=${apiKey}&units=metric`;
+    fetch(url) //pasamos la url a la cual queremos acceder al fetch, este metodo devuelve una promesa que contiene la respuesta
+        .then(response => response.json())//convertimos las respuesta a formato json
+        .then(data => { //podemos manipular la data, en la data esta la informacion de la respuesta de la API
+            const li = document.createElement("li");
+            const markup = //creamos la estructura que sera añadida al html
+            `<div class="card p-3 text-white bg-gray-500 rounded-sm shadow-lg m-1">
+                <h2 class="city-name">
+                    <span>${data.name}</span>
+                    <sup>${data.sys.country}</sup>
+                </h2>
+                <div class="city-temp">
+                    ${Math.round(data.main.temp)}
+                    <sup>°C</sup>
+                    <figure>
+                        <img class="city-icon" src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
+                    </figure>
+                </div>
+            </div>`;
+            li.innerHTML = markup;
+            list.appendChild(li);
+            form.reset();
+            form.focus();
+        }) 
+
+        .catch((error) =>{console.log(error)}) //cacheamos los erorres
+
     
+    
+    
+
 });
-
-function weatherInformation (cityName) {
-    window
-        .fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`) //llamamos a la api
-        .then((data) => data.json()) //volvemos la data en formato JSON
-        .then(data => {
-            renderWeather(data); //llamamos a la funcion que va a renderizar
-        })
-};
-
-function renderWeather(data) {
-    const app = getElementById("app");
-    app.append(data);
-}
 
 
