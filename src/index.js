@@ -7,10 +7,15 @@ const apiKey = "f909614ec47c0514210c5a1dcc829f6f";
 const form = document.querySelector(".containerSearch form");
 const input = document.querySelector(".containerSearch input");
 const list = document.querySelector(".app .container .cities");
+const searchedCities = [];
 
 form.addEventListener("submit",(event) =>{ //escuchamos los eventos
     event.preventDefault(); //la pagina no se recargue de nuevo
     let inputValue = input.value; //obtenemos el valor (cityName) del input
+    searchedCities.push(inputValue.toLowerCase());//agregamos la ciudad buscada a un array 
+    console.log(searchedCities);
+
+    
 
     //ajax here
     //utilizamos promesas
@@ -33,9 +38,9 @@ form.addEventListener("submit",(event) =>{ //escuchamos los eventos
                     </figure>
                 </div>
             </div>`;
-            li.innerHTML = markup;
+            li.innerHTML = markup; //agregamos la estructura creada en el markup a la etiqueta "li"
             list.appendChild(li);
-            form.reset();
+            form.reset(); //limpiamos el buscador del formulario
             form.focus();
         }) 
 
