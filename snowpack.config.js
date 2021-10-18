@@ -5,6 +5,6 @@ module.exports = {
     src: '/_dist_',
   },
   buildOptions: {
-    baseUrl: '',
+    baseUrl: 'https://carlosvf22.github.io/Manipulacion_DOM_WeatherApp/',
   },
 }
